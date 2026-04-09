@@ -1,29 +1,237 @@
-
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-.tab-btn { background: none; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 7px 16px; font-size: 13px; cursor: pointer; color: var(--color-text-secondary); transition: all .15s; }
-.tab-btn.active { background: var(--color-background-info); color: var(--color-text-info); border-color: var(--color-border-info); font-weight: 500; }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 12px; }
-.badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: var(--border-radius-md); font-weight: 500; }
-.badge-teal { background: #E1F5EE; color: #0F6E56; }
-.badge-amber { background: #FAEEDA; color: #854F0B; }
-.badge-purple { background: #EEEDFE; color: #3C3489; }
-.badge-coral { background: #FAECE7; color: #993C1D; }
-.badge-blue { background: #E6F1FB; color: #185FA5; }
-.section-label { font-size: 11px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 8px; font-weight: 500; }
-.rev-bar-wrap { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
-.rev-bar-bg { flex: 1; height: 8px; background: var(--color-background-secondary); border-radius: 4px; overflow: hidden; }
-.rev-bar { height: 100%; border-radius: 4px; }
-.pill-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f8f9fa;
+    --color-background-app: #f2f4f7;
+    --color-border-tertiary: #eaecf0;
+    --color-border-info: #101828;
+    --color-background-info: #101828;
+    --color-text-info: #ffffff;
+    --color-text-primary: #101828;
+    --color-text-secondary: #475467;
+    --color-text-tertiary: #667085;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
+    --shadow-md: 0 4px 8px -2px rgba(16, 24, 40, 0.1), 0 2px 4px -2px rgba(16, 24, 40, 0.06);
+  }
+
+  body {
+    background-color: var(--color-background-app);
+    font-family: 'Inter', 'Prompt', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    margin: 0;
+  }
+
+  .container {
+    background: var(--color-background-primary);
+    max-width: 800px;
+    width: 100%;
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .header-subtitle {
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .header-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .header-desc {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin: 0 0 32px;
+    font-weight: 300;
+  }
+
+  .tab-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border-tertiary);
+  }
+
+  .tab-btn {
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: 30px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .tab-btn:hover {
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+  }
+
+  .tab-btn.active {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    border-color: var(--color-border-info);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: #d0d5dd;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .stat-card {
+    background: var(--color-background-secondary);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    letter-spacing: -0.03em;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .badge-teal { background: #ECFDF3; color: #027A48; border: 1px solid #ABEFC6; }
+  .badge-amber { background: #FFFAEB; color: #B54708; border: 1px solid #FEDF89; }
+  .badge-purple { background: #F4F3FF; color: #5925DC; border: 1px solid #D9D6FE; }
+  .badge-coral { background: #FEF3F2; color: #B42318; border: 1px solid #FECDCA; }
+  .badge-blue { background: #EFF8FF; color: #175CD3; border: 1px solid #B2DDFF; }
+
+  .section-label {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+
+  .rev-bar-wrap { margin: 12px 0; }
+  .rev-bar-header { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; color: var(--color-text-primary); }
+  .rev-bar-bg { width: 100%; height: 8px; background: var(--color-background-secondary); border-radius: 10px; overflow: hidden; }
+  .rev-bar { height: 100%; border-radius: 10px; }
+  
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+  }
+
+  .ticket-card {
+    background: var(--color-background-secondary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    transition: all 0.2s ease;
+  }
+  .ticket-card:hover {
+    background: var(--color-background-primary);
+    border-color: #d0d5dd;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .list-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+  .list-item > div {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-background-secondary);
+  }
+  .list-item > div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 </style>
+</head>
+<body>
 
-<div style="padding: 1rem 0 0;">
-  <div style="margin-bottom: 4px; font-size: 13px; color: var(--color-text-tertiary);">Concept Proposal · RCA Bangkok · April 2027</div>
-  <h2 style="font-size: 20px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary);">SIAM SPLASH DISTRICT 2027</h2>
-  <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 20px;">"Water Culture Festival" — เทศกาลสงกรานต์ระดับสากลบนพื้นที่ RCA</p>
+<div class="container">
+  <div class="header-subtitle">Concept Proposal · RCA Bangkok · April 2027</div>
+  <h2 class="header-title">SIAM SPLASH DISTRICT 2027</h2>
+  <p class="header-desc">"Water Culture Festival" — เทศกาลสงกรานต์ระดับสากลบนพื้นที่ RCA</p>
 
-  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+  <div class="tab-container">
     <button class="tab-btn active" onclick="switchTab('concept')">Concept</button>
     <button class="tab-btn" onclick="switchTab('zones')">Zones & Program</button>
     <button class="tab-btn" onclick="switchTab('stakeholders')">Stakeholders</button>
@@ -35,26 +243,26 @@
   <div id="tab-concept" class="tab-panel active">
     <div class="card">
       <p class="section-label">Big Idea</p>
-      <p style="font-size: 15px; font-weight: 500; margin: 0 0 8px;">RCA ไม่ใช่แค่ถนนสาย party — แต่เป็น "Cultural Entertainment District" ที่มีชีวิต</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">เปลี่ยนสงกรานต์ 3 วันให้เป็น 10-14 วัน Immersive Water Festival ที่ผสาน tradition + nightlife + art + food เจาะทั้งคนไทยและนักท่องเที่ยวต่างชาติ</p>
+      <p style="font-size: 16px; font-weight: 500; margin: 0 0 8px; color: var(--color-text-primary);">RCA ไม่ใช่แค่ถนนสาย party — แต่เป็น "Cultural Entertainment District" ที่มีชีวิต</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">เปลี่ยนสงกรานต์ 3 วันให้เป็น 10-14 วัน Immersive Water Festival ที่ผสาน tradition + nightlife + art + food เจาะทั้งคนไทยและนักท่องเที่ยวต่างชาติ</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px;">
-      <div class="card" style="margin: 0;">
-        <div style="font-size: 22px; font-weight: 500; color: var(--color-text-primary);">14</div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">วันจัดงาน</div>
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="stat-number">14</div>
+        <div class="stat-label">วันจัดงาน</div>
       </div>
-      <div class="card" style="margin: 0;">
-        <div style="font-size: 22px; font-weight: 500; color: var(--color-text-primary);">5</div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">Themed Zones</div>
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Themed Zones</div>
       </div>
-      <div class="card" style="margin: 0;">
-        <div style="font-size: 22px; font-weight: 500; color: var(--color-text-primary);">3+</div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">Revenue Streams</div>
+      <div class="stat-card">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Revenue Streams</div>
       </div>
-      <div class="card" style="margin: 0;">
-        <div style="font-size: 22px; font-weight: 500; color: var(--color-text-primary);">100K+</div>
-        <div style="font-size: 12px; color: var(--color-text-secondary);">Target Visitors</div>
+      <div class="stat-card">
+        <div class="stat-number">100K+</div>
+        <div class="stat-label">Target Visitors</div>
       </div>
     </div>
 
@@ -67,36 +275,36 @@
         <span class="badge badge-coral">Gastronomy</span>
         <span class="badge badge-blue">International Standard</span>
       </div>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 12px 0 0;">เทียบเคียง Wonderfruit / Coachella แต่มี Thai Soul — ไม่ใช่แค่สาดน้ำ แต่เป็น Destination Event ที่นักท่องเที่ยวต่างชาติตั้งใจมา</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 16px 0 0; line-height: 1.6;">เทียบเคียง Wonderfruit / Coachella แต่มี Thai Soul — ไม่ใช่แค่สาดน้ำ แต่เป็น Destination Event ที่นักท่องเที่ยวต่างชาติตั้งใจมา</p>
     </div>
   </div>
 
   <!-- ZONES TAB -->
   <div id="tab-zones" class="tab-panel">
     <div class="card">
-      <span class="badge badge-teal" style="margin-bottom: 10px; display: inline-block;">Zone 1</span>
-      <p style="font-size: 14px; font-weight: 500; margin: 0 0 4px;">HERITAGE BOULEVARD — ถนนวัฒนธรรม</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">พิธีสรงน้ำพระ, ขนมไทยโบราณ, สมุนไพร, ดนตรีไทย, ช่างฝีมือ OTOP คัดสรร ให้นักท่องเที่ยวสัมผัสสงกรานต์แบบดั้งเดิม</p>
+      <span class="badge badge-teal" style="margin-bottom: 12px;">Zone 1</span>
+      <p style="font-size: 16px; font-weight: 500; margin: 0 0 6px; color: var(--color-text-primary);">HERITAGE BOULEVARD — ถนนวัฒนธรรม</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">พิธีสรงน้ำพระ, ขนมไทยโบราณ, สมุนไพร, ดนตรีไทย, ช่างฝีมือ OTOP คัดสรร ให้นักท่องเที่ยวสัมผัสสงกรานต์แบบดั้งเดิม</p>
     </div>
     <div class="card">
-      <span class="badge badge-amber" style="margin-bottom: 10px; display: inline-block;">Zone 2</span>
-      <p style="font-size: 14px; font-weight: 500; margin: 0 0 4px;">SPLASH ARENA — Main Water Battlefield</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">พื้นที่สาดน้ำหลัก Water Cannon, Color Run, Foam Party, LED Night Splash พร้อม DJ Stage หลัก Capacity 5,000+ คน</p>
+      <span class="badge badge-amber" style="margin-bottom: 12px;">Zone 2</span>
+      <p style="font-size: 16px; font-weight: 500; margin: 0 0 6px; color: var(--color-text-primary);">SPLASH ARENA — Main Water Battlefield</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">พื้นที่สาดน้ำหลัก Water Cannon, Color Run, Foam Party, LED Night Splash พร้อม DJ Stage หลัก Capacity 5,000+ คน</p>
     </div>
     <div class="card">
-      <span class="badge badge-purple" style="margin-bottom: 10px; display: inline-block;">Zone 3</span>
-      <p style="font-size: 14px; font-weight: 500; margin: 0 0 4px;">NEON TEMPLE — Art & Club District</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">ดึงพลังของ RCA Club Scene — venue ต่าง ๆ เปิดเป็น Pop-up Art Installations, Projection Mapping วัด/ศาล, ศิลปินไทย-นานาชาติ</p>
+      <span class="badge badge-purple" style="margin-bottom: 12px;">Zone 3</span>
+      <p style="font-size: 16px; font-weight: 500; margin: 0 0 6px; color: var(--color-text-primary);">NEON TEMPLE — Art & Club District</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">ดึงพลังของ RCA Club Scene — venue ต่าง ๆ เปิดเป็น Pop-up Art Installations, Projection Mapping วัด/ศาล, ศิลปินไทย-นานาชาติ</p>
     </div>
     <div class="card">
-      <span class="badge badge-coral" style="margin-bottom: 10px; display: inline-block;">Zone 4</span>
-      <p style="font-size: 14px; font-weight: 500; margin: 0 0 4px;">TASTE OF THAI — Food & Beverage Village</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">Pop-up ร้านอาหารมิชลิน, Street Food Curated, Cocktail Bar ฝีมือ Mixologist ชั้นนำ, Craft Beer ไทย Brunch Weekend Market</p>
+      <span class="badge badge-coral" style="margin-bottom: 12px;">Zone 4</span>
+      <p style="font-size: 16px; font-weight: 500; margin: 0 0 6px; color: var(--color-text-primary);">TASTE OF THAI — Food & Beverage Village</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">Pop-up ร้านอาหารมิชลิน, Street Food Curated, Cocktail Bar ฝีมือ Mixologist ชั้นนำ, Craft Beer ไทย Brunch Weekend Market</p>
     </div>
     <div class="card">
-      <span class="badge badge-blue" style="margin-bottom: 10px; display: inline-block;">Zone 5</span>
-      <p style="font-size: 14px; font-weight: 500; margin: 0 0 4px;">WELLNESS OASIS — Recovery & Spa</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">มุมพักฟื้นหลังสาดน้ำ: Nuad Thai, Herbal Steam, Yoga Sunrise, Silent Disco — ดึงกลุ่ม Wellness Traveler ซึ่งเติบโตสูงมาก</p>
+      <span class="badge badge-blue" style="margin-bottom: 12px;">Zone 5</span>
+      <p style="font-size: 16px; font-weight: 500; margin: 0 0 6px; color: var(--color-text-primary);">WELLNESS OASIS — Recovery & Spa</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">มุมพักฟื้นหลังสาดน้ำ: Nuad Thai, Herbal Steam, Yoga Sunrise, Silent Disco — ดึงกลุ่ม Wellness Traveler ซึ่งเติบโตสูงมาก</p>
     </div>
   </div>
 
@@ -104,7 +312,7 @@
   <div id="tab-stakeholders" class="tab-panel">
     <div class="card">
       <p class="section-label">ภาครัฐ (Public Sector)</p>
-      <div style="font-size: 13px; color: var(--color-text-secondary); display: flex; flex-direction: column; gap: 8px;">
+      <div class="list-item">
         <div><span style="font-weight: 500; color: var(--color-text-primary);">กรุงเทพมหานคร (กทม.)</span> — อนุมัติใช้พื้นที่สาธารณะ, ความปลอดภัย, ระบบจัดการจราจร, การเชื่อมต่อ MRT/BRT</div>
         <div><span style="font-weight: 500; color: var(--color-text-primary);">ททท. (TAT)</span> — ร่วม co-fund งบการตลาด, โปรโมทต่างประเทศ, เชื่อมโยง Tour Operators</div>
         <div><span style="font-weight: 500; color: var(--color-text-primary);">กระทรวงวัฒนธรรม</span> — รับรองความถูกต้องทาง cultural content, สนับสนุน Artist กลุ่มอนุรักษ์</div>
@@ -113,17 +321,17 @@
     </div>
     <div class="card">
       <p class="section-label">ภาคเอกชน (Private Sector)</p>
-      <div style="font-size: 13px; color: var(--color-text-secondary); display: flex; flex-direction: column; gap: 8px;">
+      <div class="list-item">
         <div><span style="font-weight: 500; color: var(--color-text-primary);">เจ้าของที่ดิน/อาคาร RCA</span> — Revenue sharing จากพื้นที่ + ผลประโยชน์ระยะยาวจาก destination branding</div>
-        <div><span style="font-weight: 500; color: var(--color-text-primary);">Venue operators (Route 66, Onyx ฯลฯ)</span> — Night program, ลด overhead ค่าเช่า แลก exclusive programming</div>
-        <div><span style="font-weight: 500; color: var(--color-text-primary);">Hotel Partners (อโศก-พระราม 9)</span> — Festival Package ร่วม, Shuttle bus, Cross-promotion</div>
-        <div><span style="font-weight: 500; color: var(--color-text-primary);">Sponsors หลัก</span> — Beverage (Chang/Leo/Singha), Telecom (AIS/DTAC), FinTech (Rabbit Pay), Fashion, Beauty</div>
-        <div><span style="font-weight: 500; color: var(--color-text-primary);">Event Production Company</span> — ผู้รับจ้างหลัก, stage, logistics, security, waste management</div>
+        <div><span style="font-weight: 500; color: var(--color-text-primary);">Venue operators</span> — Night program, ลด overhead ค่าเช่า แลก exclusive programming</div>
+        <div><span style="font-weight: 500; color: var(--color-text-primary);">Hotel Partners</span> — Festival Package ร่วม, Shuttle bus, Cross-promotion</div>
+        <div><span style="font-weight: 500; color: var(--color-text-primary);">Sponsors หลัก</span> — Beverage, Telecom, FinTech, Fashion, Beauty</div>
+        <div><span style="font-weight: 500; color: var(--color-text-primary);">Event Production</span> — ผู้รับจ้างหลัก, stage, logistics, security, waste management</div>
       </div>
     </div>
     <div class="card">
       <p class="section-label">โครงสร้างการบริหาร</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">จัดตั้ง <strong style="color: var(--color-text-primary);">Festival Management Committee</strong> แบบ PPP (Public-Private Partnership) — ประกอบด้วย กทม. + ททท. + เจ้าของพื้นที่ + Organizer โดยแต่ละฝ่ายมี seat ใน board ชัดเจน มี MOU ร่วมและ escrow สำหรับ revenue distribution</p>
+      <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.6;">จัดตั้ง <strong style="color: var(--color-text-primary);">Festival Management Committee</strong> แบบ PPP (Public-Private Partnership) — ประกอบด้วย กทม. + ททท. + เจ้าของพื้นที่ + Organizer โดยแต่ละฝ่ายมี seat ใน board ชัดเจน มี MOU ร่วมและ escrow สำหรับ revenue distribution</p>
     </div>
   </div>
 
@@ -131,106 +339,111 @@
   <div id="tab-revenue" class="tab-panel">
     <div class="card">
       <p class="section-label">Revenue Streams</p>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Sponsorship & Brand Activation</span><span style="font-weight: 500;">35%</span></div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:35%; background:#1D9E75;"></div></div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="rev-bar-wrap">
+          <div class="rev-bar-header"><span>Sponsorship & Brand Activation</span><span style="font-weight: 600;">35%</span></div>
+          <div class="rev-bar-bg"><div class="rev-bar" style="width:35%; background:#12B76A;"></div></div>
         </div>
-        <div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Ticket / Wristband (Zoned Access)</span><span style="font-weight: 500;">25%</span></div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:25%; background:#7F77DD;"></div></div>
+        <div class="rev-bar-wrap">
+          <div class="rev-bar-header"><span>Ticket / Wristband (Zoned Access)</span><span style="font-weight: 600;">25%</span></div>
+          <div class="rev-bar-bg"><div class="rev-bar" style="width:25%; background:#7A5AF8;"></div></div>
         </div>
-        <div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>F&B Concession & Vendor Fees</span><span style="font-weight: 500;">20%</span></div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:20%; background:#D85A30;"></div></div>
+        <div class="rev-bar-wrap">
+          <div class="rev-bar-header"><span>F&B Concession & Vendor Fees</span><span style="font-weight: 600;">20%</span></div>
+          <div class="rev-bar-bg"><div class="rev-bar" style="width:20%; background:#F04438;"></div></div>
         </div>
-        <div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Merchandise & Licensing</span><span style="font-weight: 500;">10%</span></div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:10%; background:#BA7517;"></div></div>
+        <div class="rev-bar-wrap">
+          <div class="rev-bar-header"><span>Merchandise & Licensing</span><span style="font-weight: 600;">10%</span></div>
+          <div class="rev-bar-bg"><div class="rev-bar" style="width:10%; background:#F79009;"></div></div>
         </div>
-        <div>
-          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Media Rights & Digital Content</span><span style="font-weight: 500;">10%</span></div>
-          <div class="rev-bar-bg"><div class="rev-bar" style="width:10%; background:#378ADD;"></div></div>
+        <div class="rev-bar-wrap">
+          <div class="rev-bar-header"><span>Media Rights & Digital Content</span><span style="font-weight: 600;">10%</span></div>
+          <div class="rev-bar-bg"><div class="rev-bar" style="width:10%; background:#2E90FA;"></div></div>
         </div>
       </div>
     </div>
+    
     <div class="card">
       <p class="section-label">Ticketing Model</p>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px;">
-          <div style="font-size: 12px; color: var(--color-text-tertiary);">Free Zone</div>
-          <div style="font-size: 16px; font-weight: 500;">฿0</div>
-          <div style="font-size: 11px; color: var(--color-text-secondary);">Heritage + Food Village เข้าฟรี ดึง foot traffic</div>
+      <div class="ticket-grid">
+        <div class="ticket-card">
+          <div style="font-size: 13px; color: var(--color-text-tertiary); font-weight: 500;">Free Zone</div>
+          <div style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin: 4px 0 8px;">฿0</div>
+          <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;">Heritage + Food Village เข้าฟรี ดึง foot traffic</div>
         </div>
-        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px;">
-          <div style="font-size: 12px; color: var(--color-text-tertiary);">Day Pass</div>
-          <div style="font-size: 16px; font-weight: 500;">฿350–500</div>
-          <div style="font-size: 11px; color: var(--color-text-secondary);">Splash Arena + Art Zone</div>
+        <div class="ticket-card">
+          <div style="font-size: 13px; color: var(--color-text-tertiary); font-weight: 500;">Day Pass</div>
+          <div style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin: 4px 0 8px;">฿350–500</div>
+          <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;">Splash Arena + Art Zone</div>
         </div>
-        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px;">
-          <div style="font-size: 12px; color: var(--color-text-tertiary);">Night Pass</div>
-          <div style="font-size: 16px; font-weight: 500;">฿600–900</div>
-          <div style="font-size: 11px; color: var(--color-text-secondary);">Neon Temple + Premium DJ</div>
+        <div class="ticket-card">
+          <div style="font-size: 13px; color: var(--color-text-tertiary); font-weight: 500;">Night Pass</div>
+          <div style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin: 4px 0 8px;">฿600–900</div>
+          <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;">Neon Temple + Premium DJ</div>
         </div>
-        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px;">
-          <div style="font-size: 12px; color: var(--color-text-tertiary);">All-Access (10 วัน)</div>
-          <div style="font-size: 16px; font-weight: 500;">฿2,500+</div>
-          <div style="font-size: 11px; color: var(--color-text-secondary);">Early Bird + VIP Lounge</div>
+        <div class="ticket-card">
+          <div style="font-size: 13px; color: var(--color-text-tertiary); font-weight: 500;">All-Access (10 วัน)</div>
+          <div style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin: 4px 0 8px;">฿2,500+</div>
+          <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;">Early Bird + VIP Lounge</div>
         </div>
       </div>
     </div>
+
     <div class="card">
       <p class="section-label">Cost Share Model (PPP)</p>
-      <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 8px;">แบ่งตามบทบาท ลดความเสี่ยงให้ทุกฝ่าย</p>
-      <div style="font-size: 13px; display: flex; flex-direction: column; gap: 6px;">
-        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary);">กทม./รัฐ</span><span>Security, roads, utilities (In-kind)</span></div>
-        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary);">ททท.</span><span>Marketing co-fund ≤30% งบโปรโมท</span></div>
-        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary);">เจ้าของพื้นที่</span><span>พื้นที่ + สิ่งอำนวยความสะดวก</span></div>
-        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary);">Organizer</span><span>Production + P&L Risk + Revenue upside</span></div>
+      <div class="list-item">
+        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary); font-weight: 500;">กทม./รัฐ</span><span>Security, roads, utilities (In-kind)</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary); font-weight: 500;">ททท.</span><span>Marketing co-fund ≤30% งบโปรโมท</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary); font-weight: 500;">เจ้าของพื้นที่</span><span>พื้นที่ + สิ่งอำนวยความสะดวก</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="color: var(--color-text-secondary); font-weight: 500;">Organizer</span><span>Production + P&L Risk + Revenue upside</span></div>
       </div>
     </div>
   </div>
 
   <!-- TARGET TAB -->
   <div id="tab-targets" class="tab-panel">
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-          <p style="font-weight: 500; font-size: 14px; margin: 0;">คนไทย: Young Urban (22–35)</p>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div class="card" style="margin: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <p style="font-weight: 600; font-size: 16px; margin: 0; color: var(--color-text-primary);">คนไทย: Young Urban (22–35)</p>
           <span class="badge badge-teal">40%</span>
         </div>
-        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">กลุ่ม Gen Z–Millennial กรุงเทพ + ต่างจังหวัด ที่ต้องการสงกรานต์แบบ premium ไม่ใช่แค่สาดน้ำข้างถนน มีกำลังจ่ายและแชร์โซเชียล</p>
+        <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">กลุ่ม Gen Z–Millennial กรุงเทพ + ต่างจังหวัด ที่ต้องการสงกรานต์แบบ premium ไม่ใช่แค่สาดน้ำข้างถนน มีกำลังจ่ายและแชร์โซเชียล</p>
       </div>
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-          <p style="font-weight: 500; font-size: 14px; margin: 0;">นักท่องเที่ยวเอเชีย (ญี่ปุ่น/จีน/เกาหลี/สิงคโปร์)</p>
+      
+      <div class="card" style="margin: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <p style="font-weight: 600; font-size: 16px; margin: 0; color: var(--color-text-primary);">นักท่องเที่ยวเอเชีย (ญี่ปุ่น/จีน/เกาหลี/สิงคโปร์)</p>
           <span class="badge badge-purple">30%</span>
         </div>
-        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">ตลาดที่โตเร็วที่สุด ต้องการ Cultural Experience ที่ถ่ายรูปสวย Instagrammable พร้อม Night Program คุณภาพสูง</p>
+        <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">ตลาดที่โตเร็วที่สุด ต้องการ Cultural Experience ที่ถ่ายรูปสวย Instagrammable พร้อม Night Program คุณภาพสูง</p>
       </div>
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-          <p style="font-weight: 500; font-size: 14px; margin: 0;">นักท่องเที่ยวตะวันตก + ออสเตรเลีย</p>
+      
+      <div class="card" style="margin: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <p style="font-weight: 600; font-size: 16px; margin: 0; color: var(--color-text-primary);">นักท่องเที่ยวตะวันตก + ออสเตรเลีย</p>
           <span class="badge badge-amber">20%</span>
         </div>
-        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">กลุ่ม Festival-goers ที่รู้จัก Songkran จาก media ต้องการ "Bucket List" experience อยู่นานกว่าเฉลี่ย ใช้จ่ายต่อหัวสูงสุด</p>
+        <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">กลุ่ม Festival-goers ที่รู้จัก Songkran จาก media ต้องการ "Bucket List" experience อยู่นานกว่าเฉลี่ย ใช้จ่ายต่อหัวสูงสุด</p>
       </div>
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-          <p style="font-weight: 500; font-size: 14px; margin: 0;">Corporate / MICE + Wellness Travelers</p>
+      
+      <div class="card" style="margin: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <p style="font-weight: 600; font-size: 16px; margin: 0; color: var(--color-text-primary);">Corporate / MICE + Wellness Travelers</p>
           <span class="badge badge-coral">10%</span>
         </div>
-        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0;">กลุ่มที่ใช้ Wellness Zone + Corporate Buyout Event ในงาน ราคาต่อหัวสูง ช่วยเพิ่ม B2B revenue stream</p>
+        <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">กลุ่มที่ใช้ Wellness Zone + Corporate Buyout Event ในงาน ราคาต่อหัวสูง ช่วยเพิ่ม B2B revenue stream</p>
       </div>
-    </div>
-    <div class="card" style="margin-top: 4px;">
-      <p class="section-label">Marketing Channels</p>
-      <div class="pill-row">
-        <span class="badge badge-teal">TikTok/IG Campaign</span>
-        <span class="badge badge-blue">ททท. International Office</span>
-        <span class="badge badge-amber">Travel Influencers</span>
-        <span class="badge badge-purple">Airbnb Experiences</span>
-        <span class="badge badge-coral">OTA Packages</span>
+
+      <div class="card" style="margin: 0;">
+        <p class="section-label">Marketing Channels</p>
+        <div class="pill-row">
+          <span class="badge badge-teal">TikTok/IG Campaign</span>
+          <span class="badge badge-blue">ททท. International Office</span>
+          <span class="badge badge-amber">Travel Influencers</span>
+          <span class="badge badge-purple">Airbnb Experiences</span>
+          <span class="badge badge-coral">OTA Packages</span>
+        </div>
       </div>
     </div>
   </div>
@@ -240,7 +453,10 @@
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  
   document.getElementById('tab-' + name).classList.add('active');
   event.target.classList.add('active');
 }
 </script>
+</body>
+</html>
